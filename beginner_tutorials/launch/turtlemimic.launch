@@ -1,0 +1,7 @@
+<launch>
+
+  <node name="turtle" pkg="turtlesim" type="turtlesim_node" />
+  <node name="talker" pkg="beginner_tutorials" type="talker" />
+
+</launch>
+
