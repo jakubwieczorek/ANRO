@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <kdl/kdl.hpp>
 #include <kdl/tree.hpp>
 #include <kdl/chain.hpp>
