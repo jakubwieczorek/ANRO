@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(Lab2)
+project(Lab3)
 
 ## Add support for C++11, supported in ROS Kinetic and newer
 # add_definitions(-std=c++11)
@@ -110,7 +110,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 # INCLUDE_DIRS include
-# LIBRARIES Lab2
+# LIBRARIES Lab3
 # CATKIN_DEPENDS kdl_conversions kdl_parser roscpp rospy sensor_msgs std_msgs tf urdf
 # DEPENDS system_lib
 )
