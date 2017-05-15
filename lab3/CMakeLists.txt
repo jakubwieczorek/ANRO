@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(Lab2)
+project(lab3)
 
 ## Add support for C++11, supported in ROS Kinetic and newer
 # add_definitions(-std=c++11)
@@ -14,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   sensor_msgs
   std_msgs
+  message_generation
   tf
   urdf
 )
@@ -108,10 +109,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES Lab2
-#  CATKIN_DEPENDS kdl_conversions kdl_parser roscpp rospy sensor_msgs std_msgs tf urdf
-#  DEPENDS system_lib
+# INCLUDE_DIRS include
+# LIBRARIES Lab2
+# CATKIN_DEPENDS kdl_conversions kdl_parser roscpp rospy sensor_msgs std_msgs tf urdf
+# DEPENDS system_lib
 )
 
 ###########
@@ -140,7 +141,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/Lab2_node.cpp)
 
-add_executable(convert1 src/changeDhToUrdf1.cpp)
+add_executable(convert src/changeDhToUrdf.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -153,7 +154,7 @@ add_executable(convert1 src/changeDhToUrdf1.cpp)
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(convert1
+target_link_libraries(convert
   ${catkin_LIBRARIES}
 )
 #############
@@ -203,3 +204,10 @@ target_link_libraries(convert1
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+add_executable(nonkdl_dkin src/nonkdl_dkin.cpp)
+target_link_libraries(nonkdl_dkin ${catkin_LIBRARIES})
+
+
+add_executable(kdl_dkin src/kdl_dkin.cpp)
+target_link_libraries(kdl_dkin ${catkin_LIBRARIES})
