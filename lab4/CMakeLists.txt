@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(Lab3)
+project(lab4)
 
 ## Add support for C++11, supported in ROS Kinetic and newer
 # add_definitions(-std=c++11)
@@ -8,13 +8,10 @@ project(Lab3)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  kdl_conversions
-  kdl_parser
   roscpp
-  rospy
-  sensor_msgs
   std_msgs
   message_generation
+  sensor_msgs
   tf
   urdf
 )
@@ -60,11 +57,11 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+ add_service_files(
+   FILES
+   oint_control_srv.srv
+   jint_control_srv.srv
+ )
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -74,10 +71,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   sensor_msgs#   std_msgs
-# )
+ generate_messages(
+   DEPENDENCIES
+   std_msgs
+ )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -109,10 +106,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-# INCLUDE_DIRS include
-# LIBRARIES Lab3
-# CATKIN_DEPENDS kdl_conversions kdl_parser roscpp rospy sensor_msgs std_msgs tf urdf
-# DEPENDS system_lib
+  INCLUDE_DIRS
+  LIBRARIES lab4
+  CATKIN_DEPENDS message_runtime roscpp std_msgs
+#  DEPENDS system_lib
 )
 
 ###########
@@ -128,7 +125,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/Lab2.cpp
+#   src/${PROJECT_NAME}/zadanie4.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -137,11 +134,11 @@ include_directories(
 # add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
+add_executable(jint src/jint.cpp)
+add_executable(oint src/oint.cpp)
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/Lab2_node.cpp)
-
-add_executable(convert src/changeDhToUrdf.cpp)
+# add_executable(${PROJECT_NAME}_node src/zadanie4_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -152,9 +149,16 @@ add_executable(convert src/changeDhToUrdf.cpp)
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
+add_dependencies(jint lab4_generate_messages_cpp)
+add_dependencies(oint lab4_generate_messages_cpp)
 ## Specify libraries to link a library or executable target against
-target_link_libraries(convert
+# target_link_libraries(${PROJECT_NAME}_node
+#   ${catkin_LIBRARIES}
+# )
+target_link_libraries(jint
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(oint
   ${catkin_LIBRARIES}
 )
 #############
@@ -197,17 +201,10 @@ target_link_libraries(convert
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_Lab2.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_zadanie4.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-
-add_executable(nonkdl_dkin src/nonkdl_dkin.cpp)
-target_link_libraries(nonkdl_dkin ${catkin_LIBRARIES})
-
-
-add_executable(kdl_dkin src/kdl_dkin.cpp)
-target_link_libraries(kdl_dkin ${catkin_LIBRARIES})

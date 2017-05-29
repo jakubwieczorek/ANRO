@@ -1,0 +1,16 @@
+<launch>
+	<arg name="model" default='$(find lab4)/urdf/dynamic.urdf' />
+	<arg name="gui" default="True" />
+	<param name="robot_description" textfile="$(arg model)" />
+
+
+	<param name="joint2_lower" type="double" value="-2.35619" />
+	<param name="joint2_upper" type="double" value="2.35619" />
+	<param name="joint3_lower" type="double" value="0" />
+	<param name="joint3_upper" type="double" value="3.0" />
+
+	<param name="use_gui" value="$(arg gui)"/>
+	<node pkg="lab4" name="jint" type="jint"/>
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find lab4)/urdf.rviz" required="true" />
+</launch>
