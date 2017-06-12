@@ -28,18 +28,18 @@ int main(int argc, char **argv)
 	if(wybor==1) // Ruch po prostokacie
 		{	
 			wierzcholek=1;
-			srv.request.x=3.0;
-			srv.request.y=2.5;
-			srv.request.z=-1.5;
+			srv.request.x=3;
+			srv.request.y=0;
+			srv.request.z=-1.0;
 			srv.request.time=0.1;
 			klient.call(srv);
 			licznik=100;
 		}
 		else // Elipsa
 		{
-			srv.request.x=3.0;
-			srv.request.y=(2.5*sqrt(7))/4;
-			srv.request.z=-1.5;
+			srv.request.x=3;
+			srv.request.y=0;
+			srv.request.z=-1.0;
 			srv.request.time=0.1;
 			x=3.0;
 			kierunek=2;
@@ -52,19 +52,19 @@ int main(int argc, char **argv)
 		{
 			if(wierzcholek==1 && licznik==100)
 			{
-				srv.request.x=3.0;
-				srv.request.y=-2.5;
-				srv.request.z=-1.5;
+				srv.request.x=0.0;
+				srv.request.y=3.0;
+				srv.request.z=-1.0;
 				srv.request.time=10;
 				klient.call(srv);
 			}
 			if(wierzcholek==1 && licznik==0)
 			{
 				wierzcholek=2;
-				licznik=120;
+				licznik=100;
 				srv.request.x=-3.0;
-				srv.request.y=-2.5;
-				srv.request.z=-1.5;
+				srv.request.y=0.0;
+				srv.request.z=-1.0;
 				srv.request.time=12;
 				klient.call(srv);
 			}
@@ -72,9 +72,9 @@ int main(int argc, char **argv)
 			{
 				wierzcholek=3;
 				licznik=100;
-				srv.request.x=-3.0;
-				srv.request.y=2.5;
-				srv.request.z=-1.5;
+				srv.request.x=0.0;
+				srv.request.y=-3.0;
+				srv.request.z=-1.0;
 				srv.request.time=10;
 				klient.call(srv);
 			}
@@ -83,8 +83,8 @@ int main(int argc, char **argv)
 				wierzcholek=0;
 				licznik=120;
 				srv.request.x=3.0;
-				srv.request.y=2.5;
-				srv.request.z=-1.5;
+				srv.request.y=0.0;
+				srv.request.z=-1.0;
 				srv.request.time=12;
 				klient.call(srv);
 			}
@@ -92,9 +92,9 @@ int main(int argc, char **argv)
 			{
 				wierzcholek=1;
 				licznik=100;
-				srv.request.x=3.0;
-				srv.request.y=-2.5;
-				srv.request.z=-1.5;
+				srv.request.x=0.0;
+				srv.request.y=3.0;
+				srv.request.z=-1.0;
 				srv.request.time=10;
 				klient.call(srv);
 			}
@@ -106,13 +106,13 @@ int main(int argc, char **argv)
 			double y;
 			if(kierunek==1)
 			{
-				if(x>-4.0) // Nie dotarliśmy do lewego krańca elipsy
+				if(x>-3.0) // Nie dotarliśmy do lewego krańca elipsy
 				{	
-					if (x-0.05>=-4.0)
+					if (x-0.05>=-3.0)
 						x=x-0.05;
 					else
-						x=-4.0;
-					y=-sqrt(6.25*(1-(x*x)/16));
+						x=-3.0;
+					y=-sqrt(5*(1-(x*x)/9));
 					srv.request.x=x;
 					srv.request.y=y;
 					klient.call(srv);
@@ -124,13 +124,13 @@ int main(int argc, char **argv)
 			}
 			if(kierunek==2)
 			{
-				if(x<4.0) // Nie dotarliśmy do lewego krańca elipsy
+				if(x<3.0) // Nie dotarliśmy do lewego krańca elipsy
 				{
-					if(x+0.05<=4.0)
+					if(x+0.05<=3.0)
 						x=x+0.05;
 					else
-						x=4.0;
-					y=sqrt(6.25*(1-(x*x)/16));
+						x=3.0;
+					y=sqrt(5*(1-(x*x)/9));
 					srv.request.x=x;
 					srv.request.y=y;
 					klient.call(srv);
@@ -139,7 +139,7 @@ int main(int argc, char **argv)
 				{
 					kierunek=1;	
 					x=x-0.05;
-					y=-sqrt(6.25*(1-(x*x)/16));
+					y=-sqrt(5*(1-(x*x)/9));
 					srv.request.x=x;
 					srv.request.y=y;
 					klient.call(srv);

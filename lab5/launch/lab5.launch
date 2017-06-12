@@ -3,9 +3,9 @@
 	<arg name="gui" default="True" />
 	<param name="robot_description" textfile="$(arg model)" />
 	<param name="arm1" type="double" value="1.0" />
-	<param name="arm2" type="double" value="3.0" />
-	<param name="joint2_lower" type="double" value="-2.35619" />
-	<param name="joint2_upper" type="double" value="2.35619" />
+	<param name="arm2" type="double" value="2.0" />
+	<param name="joint2_lower" type="double" value="-3.035619" />
+	<param name="joint2_upper" type="double" value="3.035619" />
 	<param name="joint3_lower" type="double" value="0" />
 	<param name="joint3_upper" type="double" value="3.0" />
 	<param name="use_gui" value="$(arg gui)"/>
